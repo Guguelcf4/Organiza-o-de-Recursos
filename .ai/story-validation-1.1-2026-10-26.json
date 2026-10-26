@@ -1,0 +1,45 @@
+{
+  "story": "docs/stories/1.1.resource-booking-mvp.story.md",
+  "validated_at": "2026-10-26",
+  "validator": "@po",
+  "verdict": "NO-GO",
+  "score": 5,
+  "confidence": "high for traceability and coverage; medium for scope decisions",
+  "status": {
+    "before": "Draft",
+    "after": "Draft"
+  },
+  "sources_reviewed": [
+    ".aiox-core/core-config.yaml",
+    ".aiox-core/constitution.md",
+    ".aiox-core/development/tasks/validate-next-story.md",
+    ".aiox-core/product/templates/story-tmpl.yaml",
+    "docs/prd.md",
+    "docs/requisitos-funcionais.md",
+    "docs/requisitos-nao-funcionais.md",
+    "docs/arquitetura.md",
+    "docs/stories/1.1.resource-booking-mvp.story.md"
+  ],
+  "checklist": [
+    { "criterion": "Clear objective title", "result": "PASS" },
+    { "criterion": "Complete description and value", "result": "PASS" },
+    { "criterion": "Testable acceptance criteria and coverage", "result": "PARTIAL" },
+    { "criterion": "Defined scope and boundaries", "result": "PARTIAL" },
+    { "criterion": "Dependencies and sequence", "result": "FAIL" },
+    { "criterion": "Increment granularity", "result": "FAIL" },
+    { "criterion": "Business value", "result": "PASS" },
+    { "criterion": "Documented risks", "result": "PASS" },
+    { "criterion": "Definition of Done and tests", "result": "PASS" },
+    { "criterion": "Source traceability", "result": "FAIL" }
+  ],
+  "blocking_findings": [
+    "Story claims coverage of FR-01..FR-25 and NFR-01..NFR-07 although official sources contain FR-01..FR-12 and FR-14, and NFR-01..NFR-05.",
+    "FR-03 capacity search is not reconciled with the exclusion of generic capacity; AC-29 omits explicit hours allocated and conflicts avoided from FR-12; public interaction documentation required by FR-14/NFR-05 is not verifiable in ACs.",
+    "Additional business rules need traceable approval; pending-request edit/rejection behavior, multi-resource cancellation cutoff, and observable evidence for missing-expiration alerts remain ambiguous.",
+    "UI is simultaneously described as conditional and included in scope; MVP obligation and required read-only queries are unclear.",
+    "Thirty-six acceptance criteria cover most of the product in one story; split into smaller stories or reduce scope and make dependencies explicit, keeping CLI before UI.",
+    "AC-36 cites a nonexistent NFR-07 for benchmark targets; remove the attribution and retain only as an explicitly authorized non-blocking experiment.",
+    "coderabbit_integration.enabled is absent from core-config.yaml, so the integration cannot be assumed disabled."
+  ],
+  "development_authorized": false
+}

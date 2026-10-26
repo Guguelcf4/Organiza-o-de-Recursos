@@ -1,5 +1,7 @@
 # Requisitos Funcionais
 
+**Versão:** 0.1.1
+
 ## 1. Escopo
 
 Este documento detalha os requisitos funcionais do produto de gestão de disponibilidade e alocação de salas, professores e materiais descrito em [PRD](prd.md). Abrange consulta e administração de recursos, reservas, aprovações, movimentações de materiais, auditoria, notificações, relatórios e documentação dos pontos de interação expostos pelo produto.
@@ -42,25 +44,28 @@ O sistema deve permitir cadastrar e consultar salas, professores e materiais. A 
 
 ### FR-03 — Pesquisa de recursos
 
-**Obrigatoriedade:** Obrigatório | **Origem:** Pedido, item 3; PRD, seções 3, 4.1, 5 e 7.1.
+**Obrigatoriedade:** Obrigatório | **Status no incremento atual:** o filtro por capacidade está explicitamente adiado e não faz parte deste incremento. A intenção de oferecer esse filtro em incremento futuro permanece; sua semântica e seus critérios de verificação ainda dependem de decisão do produto. | **Origem:** Pedido, item 3; PRD, seções 3, 4.1, 5 e 7.1.
 
-O sistema deve permitir pesquisar recursos por tipo, capacidade, localização, competência e disponibilidade. Os resultados devem corresponder aos critérios informados e não devem expor reservas ou dados fora das permissões do usuário.
+Neste incremento, o sistema deve permitir pesquisar recursos por tipo, localização, competência e disponibilidade. Os resultados devem corresponder aos critérios informados e não devem expor reservas ou dados fora das permissões do usuário. O filtro por capacidade permanece parte da intenção futura do requisito, mas não deve ser interpretado ou implementado neste incremento; não se presume aqui o significado de capacidade, sua representação ou sua aplicabilidade aos tipos de recurso.
 
 **Critérios de verificação:**
-- Executar pesquisas usando cada critério e combinações de critérios aplicáveis aos recursos cadastrados.
-- Comparar os resultados com os atributos e a disponibilidade registrados para confirmar que atendem aos filtros informados.
+- Executar pesquisas usando cada critério incluído neste incremento e combinações aplicáveis aos recursos cadastrados.
+- Comparar os resultados com os atributos e a disponibilidade registrados para confirmar que atendem aos filtros incluídos neste incremento.
 - Verificar que os resultados respeitam o escopo de acesso do perfil utilizado.
+- O filtro por capacidade não é critério de aceite deste incremento; seus critérios serão definidos quando o produto decidir a semântica para implementação futura.
 
 ### FR-04 — Criação, alteração e cancelamento de reservas
 
-**Obrigatoriedade:** Obrigatório | **Origem:** Pedido, item 4; PRD, seções 4.1, 5, 6 e 7.1–7.3.
+**Obrigatoriedade:** Obrigatório | **Origem:** Pedido, item 4; PRD, seções 4.1, 5, 6 e 7.1–7.3; decisão de produto de 2026-10-26.
 
-O sistema deve permitir criar, alterar e cancelar reservas conforme as permissões do usuário e as regras aplicáveis. O Solicitante pode gerenciar as próprias reservas dentro das regras; terceiros só podem atuar quando autorizados. A alteração deve verificar novamente disponibilidade e bloqueios antes de ser confirmada. A reserva vigente deve ser preservada quando uma alteração incompatível não puder ser confirmada.
+O sistema deve permitir criar, alterar e cancelar reservas conforme as permissões do usuário e as regras aplicáveis. O Solicitante pode gerenciar as próprias reservas dentro das regras; terceiros só podem atuar quando autorizados. A alteração deve verificar novamente disponibilidade e bloqueios antes de ser confirmada. A reserva vigente deve ser preservada quando uma alteração incompatível não puder ser confirmada. Em uma reserva com múltiplos recursos, a elegibilidade para cancelamento é avaliada por recurso no momento da solicitação: somente recursos cujo horário de início ainda não chegou podem ser cancelados; recursos cujo início já chegou permanecem ativos e não impedem o cancelamento dos demais recursos elegíveis. Não se exige cancelar todos os recursos do pedido para cancelar os elegíveis. Mantêm-se o motivo, o histórico e a notificação previstos para cancelamentos, bem como as regras de autorização existentes.
 
 **Critérios de verificação:**
 - Criar, alterar e cancelar uma reserva com um perfil autorizado e verificar o estado resultante e o registro da ação.
 - Tentar alterar ou cancelar reserva fora do escopo do perfil e verificar que a ação é negada sem alteração da reserva.
 - Alterar uma reserva para intervalo ou recurso incompatível e verificar que a alteração não é confirmada e que a reserva vigente permanece preservada.
+- Em uma reserva multi-recurso com horários de início futuros e já alcançados, cancelar os recursos ainda não iniciados e verificar que somente esses são cancelados; os já iniciados permanecem ativos e não impedem a ação.
+- Verificar que o cancelamento dos recursos elegíveis mantém motivo, histórico e notificação previstos para cancelamentos.
 
 ### FR-05 — Detecção de sobreposição de horário
 
@@ -172,3 +177,11 @@ O produto deve documentar sua API, caso exponha uma, ou os fluxos públicos do s
 - Definir se o produto exporá API, fluxos públicos ou ambos, e o público consumidor pertinente.
 - Definir os dados e prazos operacionais de retirada/devolução e o tratamento de atrasos e ocorrências.
 - Definir critérios de aceitação detalhados que dependam das decisões acima.
+- Definir a semântica do filtro por capacidade de FR-03 e seus critérios de verificação para um incremento futuro.
+
+## 5. Histórico de versões
+
+| Data | Versão | Descrição | Autor |
+|---|---|---|---|
+| 2026-10-26 | 0.1.0 | Versão inicial identificada do documento; registra a decisão de adiar o filtro por capacidade de FR-03 do incremento atual, mantendo sua intenção futura e sem definir sua semântica. | @pm |
+| 2026-10-26 | 0.1.1 | Especifica cancelamento por recurso em reservas multi-recurso: recursos ainda não iniciados podem ser cancelados sem cancelar os já iniciados; preserva autorização, motivo, histórico e notificação. | @pm |

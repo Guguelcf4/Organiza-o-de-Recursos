@@ -1,0 +1,334 @@
+{
+  "story": "docs/stories/1.2.project-foundation.story.md",
+  "validated_at": "2026-10-26",
+  "validator": "@po",
+  "task": ".aiox-core/development/tasks/validate-next-story.md",
+  "verdict": "NO-GO",
+  "score": 5,
+  "confidence": "high",
+  "development_authorized": false,
+  "status": {
+    "before": "Draft",
+    "after": "Draft"
+  },
+  "requirements_versions_verified": {
+    "prd": {
+      "version": "0.2",
+      "path": "docs/prd.md"
+    },
+    "functional_requirements": {
+      "version": "0.1.1",
+      "path": "docs/requisitos-funcionais.md"
+    },
+    "nonfunctional_requirements": {
+      "version": "not declared",
+      "path": "docs/requisitos-nao-funcionais.md"
+    },
+    "architecture": {
+      "version": "0.1",
+      "path": "docs/arquitetura.md"
+    },
+    "core_config": {
+      "coderabbit_integration.enabled": false,
+      "path": ".aiox-core/core-config.yaml:32-33"
+    }
+  },
+  "sources_reviewed": [
+    ".aiox-core/development/tasks/validate-next-story.md",
+    ".aiox-core/product/checklists/po-master-checklist.md",
+    ".aiox-core/product/templates/story-tmpl.yaml",
+    ".aiox-core/core-config.yaml",
+    ".aiox-core/constitution.md",
+    "docs/prd.md",
+    "docs/requisitos-funcionais.md",
+    "docs/requisitos-nao-funcionais.md",
+    "docs/arquitetura.md",
+    "docs/stories/1.1.resource-booking-mvp.story.md",
+    "docs/stories/1.2.project-foundation.story.md",
+    "docs/stories/1.5.availability-and-blocks.story.md",
+    "docs/stories/1.7.pending-request-lifecycle.story.md",
+    "docs/stories/1.8.pending-request-edit.story.md",
+    "docs/stories/1.12.approved-booking-cancellation.story.md"
+  ],
+  "decision_alignment": {
+    "fr03_capacity_deferred": "Confirmed in current FR-03 0.1.1; not in scope of story 1.2 and no regression identified.",
+    "pending_request_cancellation": "Current FR-04 permits cancellation by resource whose start has not been reached; story 1.7 reflects this.",
+    "read_only_ui": "UI remains an MVP obligation in umbrella/story 1.17, strictly observational and after CLI journeys; story 1.2 correctly excludes UI.",
+    "coderabbit": "Disabled explicitly in core-config; story provides the disabled notice and manual review fallback; no CodeRabbit execution is assumed.",
+    "legacy_ac05_16_17_18": "Reviewed in stories 1.5, 1.8 and 1.7 respectively; interval boundary, pending-request edit/revalidation, and pending cancellation semantics remain represented without conflict with story 1.2.",
+    "umbrella_story_1_1": "Current 1.1 explicitly identifies itself as a non-implementable umbrella and does not authorize development; story 1.2 is the first implementable candidate."
+  },
+  "alignment_assessment": {
+    "prd_rf_nrf": "Foundation setup is enabling work and adds no FR/NFR. No product behavior is attributed to the story. NFR-01/02/03 are relevant only insofar as secure local configuration, database integrity, and reproducible verification are respected; the story correctly prohibits committed credentials.",
+    "architecture": "Approved Next.js and PostgreSQL stack is accurately referenced. This increment only needs PostgreSQL; Next.js UI belongs later. Versions, CLI runtime, ORM and deployment are intentionally undecided and are not blockers if the selected implementation documents reproducible bootstrap and observed versions.",
+    "constitution": "No UI or operational product behavior is introduced before CLI. Story’s statement that operational commands will be delivered via CLI before UI is directionally aligned; the story must not imply UI is needed to operate the system.",
+    "scope": "The increment is plausibly small and dependency-free as the first foundation, but acceptance details and implementation task breakdown do not yet define a sufficiently unambiguous executable bootstrap."
+  },
+  "po_checklist_10_points": [
+    {
+      "point": 1,
+      "criterion": "Objective, actor, and value are clear",
+      "result": "PASS",
+      "evidence": "Story title and user-story sentence, lines 1 and 12-13."
+    },
+    {
+      "point": 2,
+      "criterion": "Authoritative source traceability and current requirement alignment",
+      "result": "PASS",
+      "evidence": "Architecture, Constitution, ADR-006/007 and legacy AC references are cited at lines 15-18; current PRD/RF/NRF versions were checked."
+    },
+    {
+      "point": 3,
+      "criterion": "Scope boundaries and MVP increment size",
+      "result": "PASS",
+      "evidence": "Bootstrap/CLI/PostgreSQL/migrations only; booking logic, functional UI, deployment and hosted infrastructure excluded, lines 22-23."
+    },
+    {
+      "point": 4,
+      "criterion": "Acceptance criteria are observable and testable",
+      "result": "PARTIAL",
+      "evidence": "AC 1-4 and DoD provide useful outcomes, but 'CLI functional' has no minimum command/observable behavior; AC 3 does not disambiguate running migrations on an empty DB from rerunning applied migrations; AC 5 is a cross-story sequencing statement rather than a local outcome, lines 25-35."
+    },
+    {
+      "point": 5,
+      "criterion": "Dependencies and sequence are explicit",
+      "result": "PASS",
+      "evidence": "Dependency 'none' is appropriate for the first executable increment; umbrella 1.1 sequences 1.2 before 1.3 and later work. UI is correctly deferred."
+    },
+    {
+      "point": 6,
+      "criterion": "Architecture and Constitution alignment",
+      "result": "PASS",
+      "evidence": "Approved PostgreSQL/Next.js and CLI-first/read-only constraints are reflected; no unsupported version or hosting choice is asserted."
+    },
+    {
+      "point": 7,
+      "criterion": "Security, data handling, and quality gate are planned",
+      "result": "PARTIAL",
+      "evidence": "External credentials/no committed secrets and manual architect/QA gates are present, lines 9-10, 26-35 and 37-38; DB-focused executor/gate assignment should be reconciled with the task's work-type matrix."
+    },
+    {
+      "point": 8,
+      "criterion": "Tasks, Dev Notes, and testing handoff enable implementation",
+      "result": "FAIL",
+      "evidence": "No Tasks/Subtasks, Dev Notes, or Testing section exists; template requires them and implementation sequence, source-tree context, and verification tooling are not specified."
+    },
+    {
+      "point": 9,
+      "criterion": "Manual CodeRabbit fallback and required quality planning",
+      "result": "PASS",
+      "evidence": "Core config explicitly sets enabled:false; story states disabled and names manual architect review plus QA reproduction, lines 37-38."
+    },
+    {
+      "point": 10,
+      "criterion": "Self-contained executable increment with clear done evidence",
+      "result": "PARTIAL",
+      "evidence": "Clean-checkout, local DB, migrations and documentation are intended, but the minimal CLI behavior and exact reproducible migration verification remain underspecified; missing implementation sections prevent a reliable handoff."
+    }
+  ],
+  "task_validation": {
+    "template_compliance": "FAIL",
+    "missing_required_sections": [
+      "Tasks / Subtasks",
+      "Dev Notes",
+      "Testing (within Dev Notes)"
+    ],
+    "executor_assignment": "PARTIAL",
+    "executor": "@dev",
+    "quality_gate": "@architect",
+    "finding": "The story includes DB schema/migrations, for which the task's work-type table expects @data-engineer as executor and @dev as quality gate. Reconcile this or justify the mixed work type explicitly; executor and gate are distinct and tools are populated.",
+    "acceptance_criteria": "PARTIAL",
+    "testability": "PARTIAL",
+    "code_rabbit": "N/A — disabled in core-config.yaml; manual review fallback present.",
+    "code_intelligence": "Not reported; no availability result was established.",
+    "anti_hallucination": "PASS — no fixed versions, ORM, CLI runtime, deployment or domain behavior invented."
+  },
+  "findings": {
+    "critical": [
+      {
+        "id": "C1",
+        "summary": "Missing implementation handoff sections make the first executable story incomplete.",
+        "detail": "Template and task require actionable Tasks/Subtasks, Dev Notes, and Testing instructions. Without these, the increment's bootstrap order, expected project artifacts and repeatable verification are not sufficiently defined for an autonomous implementation handoff.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:6-40",
+          ".aiox-core/product/templates/story-tmpl.yaml:284-324",
+          ".aiox-core/development/tasks/validate-next-story.md:277-318"
+        ],
+        "resolution": "Add sequenced tasks mapped to ACs, relevant source-tree/architecture notes, and exact clean-checkout/database/migration/test verification outcomes. Keep technology versions as implementation choices, but require selected versions and setup commands to be recorded."
+      },
+      {
+        "id": "C2",
+        "summary": "The minimum executable CLI contract is ambiguous.",
+        "detail": "The scope says a 'functional' CLI entry point for future commands, while AC 1 merely says the entry point can be executed. A developer/tester cannot tell whether a help/version/smoke command is required, what output/exit behavior passes, or how successful PostgreSQL configuration is evidenced. AC 5 requires future operational commands before UI but cannot be verified solely when this foundation story completes.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:22-30",
+          "docs/arquitetura.md:10,23,388-400",
+          ".aiox-core/constitution.md:12-27"
+        ],
+        "resolution": "Specify a minimal observable CLI smoke/help behavior and expected success/failure evidence for this story; restate the UI sequence as a dependency/constraint without making later stories' completion an AC here."
+      }
+    ],
+    "should_fix": [
+      {
+        "id": "S1",
+        "summary": "Clarify migration baseline and repeatability semantics.",
+        "detail": "AC 3 combines creating an empty database, applying initial migration(s), and rerunning a migration sequence. State whether repeatability means reproducible application to a freshly empty database or idempotent rerun against an already migrated database, and what the initial schema contains (including whether it intentionally contains no domain tables).",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:22-35"
+        ]
+      },
+      {
+        "id": "S2",
+        "summary": "Align executor/quality gate assignment to DB migration work.",
+        "detail": "Schema/DB/migration work type maps to @data-engineer / @dev in the task, while the story assigns @dev / @architect. Clarify dominant work type or justify the exception and assign the appropriate independent quality gate.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:6-10",
+          ".aiox-core/development/tasks/validate-next-story.md:248-269"
+        ]
+      },
+      {
+        "id": "S3",
+        "summary": "Make AC 5 local and independently verifiable.",
+        "detail": "It asserts that operational product commands will precede UI, which is an architecture/backlog constraint spanning future stories rather than a verifiable result of foundation setup.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:30",
+          "docs/stories/1.1.resource-booking-mvp.story.md:28-51"
+        ]
+      },
+      {
+        "id": "S4",
+        "summary": "Describe clean-start reproducibility without fixing unapproved versions.",
+        "detail": "The story appropriately leaves versions open, but the tasks should require a clean checkout reproduction, documented selected runtime/dependencies and package-lock/lock equivalent if used, external DB configuration, migration, CLI run and test commands. These omissions are not a demand to have product-approved version numbers.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:15-35",
+          "docs/arquitetura.md:10,394-400"
+        ]
+      }
+    ],
+    "nice_to_have": [
+      {
+        "id": "N1",
+        "summary": "Add relative links to the cited architecture ADRs/Constitution and a brief source-tree orientation.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:15-18"
+        ]
+      },
+      {
+        "id": "N2",
+        "summary": "Name the evidence artifact/location for clean-environment installation and PostgreSQL migration verification.",
+        "references": [
+          "docs/stories/1.2.project-foundation.story.md:32-35"
+        ]
+      }
+    ]
+  },
+  "checklist": [
+    {
+      "criterion": "Clear objective title",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Complete description and value",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Testable acceptance criteria and coverage",
+      "result": "PARTIAL"
+    },
+    {
+      "criterion": "Defined scope and boundaries",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Dependencies and sequence",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Increment granularity",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Business/MVP value",
+      "result": "PASS"
+    },
+    {
+      "criterion": "Risks and quality planning",
+      "result": "PARTIAL"
+    },
+    {
+      "criterion": "Definition of Done and tests",
+      "result": "PARTIAL"
+    },
+    {
+      "criterion": "Source traceability and implementation handoff",
+      "result": "PARTIAL"
+    }
+  ],
+  "score_rationale": "5/10: objective, narrow scope, dependencies, approved architecture and disabled-CodeRabbit fallback are sound. Readiness is capped below GO because mandatory template sections are absent and the minimum CLI/migration acceptance is not reliably testable from the current draft. GO threshold is 7/10.",
+  "po_master_checklist_categories": [
+    {
+      "category": "1. Project Setup & Initialization",
+      "status": "PARTIAL",
+      "notes": "Clean local setup intended, but actual task sequence, tools/versions recording, and reproducible command plan are not handed off."
+    },
+    {
+      "category": "2. Infrastructure & Deployment",
+      "status": "PARTIAL",
+      "notes": "PostgreSQL and migrations included; initial schema/migration replay semantics and test evidence need clarification. Hosted deployment is correctly excluded."
+    },
+    {
+      "category": "3. External Dependencies & Integrations",
+      "status": "PASS",
+      "notes": "No external service is required; credentials remain outside repository."
+    },
+    {
+      "category": "4. UI/UX Considerations",
+      "status": "N/A",
+      "notes": "No UI belongs in story 1.2; mandatory read-only UI is sequenced later after CLI operations."
+    },
+    {
+      "category": "5. User/Agent Responsibility",
+      "status": "PARTIAL",
+      "notes": "Executor/gate assigned and distinct, but DB migration work type is inconsistent with prescribed agent mapping."
+    },
+    {
+      "category": "6. Feature Sequencing & Dependencies",
+      "status": "PASS",
+      "notes": "No prior dependency is appropriate for first increment; umbrella sequences later work after 1.2."
+    },
+    {
+      "category": "7. Risk Management (Brownfield)",
+      "status": "N/A",
+      "notes": "Brownfield-only category; this story is foundation work in a greenfield project."
+    },
+    {
+      "category": "8. MVP Scope Alignment",
+      "status": "PASS",
+      "notes": "Foundation work is enabling and does not pull booking behavior or UI into this increment."
+    },
+    {
+      "category": "9. Documentation & Handoff",
+      "status": "PARTIAL",
+      "notes": "Setup docs are an acceptance outcome, but Dev Notes/testing handoff is absent."
+    },
+    {
+      "category": "10. Post-MVP Considerations",
+      "status": "PASS",
+      "notes": "Hosted infrastructure and deployment are explicitly excluded; no unnecessary extensibility work is introduced."
+    }
+  ],
+  "mandatory_status_update": {
+    "outcome": "NO-GO",
+    "action": "Kept status Draft; appended patch Change Log version 0.1.1 per task step 12.",
+    "change_log": "2026-10-26 | 0.1.1 | Validation NO-GO (5/10) ..."
+  },
+  "repository_scope": {
+    "intended_changes": [
+      "docs/stories/1.2.project-foundation.story.md",
+      ".ai/story-validation-1.2-2026-10-26.json"
+    ],
+    "preexisting_changes_preserved": true,
+    "implementation_started": false,
+    "developer_started": false
+  }
+}

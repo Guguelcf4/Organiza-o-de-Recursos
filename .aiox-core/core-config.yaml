@@ -29,6 +29,8 @@ mcp:
   servers: []
 qa:
   qaLocation: docs/qa
+coderabbit_integration:
+  enabled: false
 prd:
   prdFile: docs/prd.md
   prdVersion: v4

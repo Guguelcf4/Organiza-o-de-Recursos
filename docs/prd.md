@@ -1,7 +1,7 @@
 # Gestão de Disponibilidade e Alocação de Recursos
 
 **Tipo de documento:** Product Requirements Document (PRD)  
-**Versão:** 0.1  
+**Versão:** 0.2
 **Status:** Rascunho  
 **Data:** 2026-10-22  
 **Responsável pelo produto:** A definir
@@ -98,6 +98,7 @@ Esta seção registra as regras já fornecidas pelo solicitante; não substitui 
 6. Bloqueios administrativos e períodos de manutenção são considerados na verificação de disponibilidade.
 7. Operações relevantes mantêm histórico com usuário responsável, data, ação e dados suficientes para rastrear a alteração.
 8. Exceções operacionais são controladas e auditadas, com justificativa quando aplicável.
+9. Em uma reserva com múltiplos recursos, no momento do cancelamento, este é permitido para cada recurso cujo horário de início ainda não chegou. Recursos cujo início já chegou permanecem ativos e não impedem o cancelamento dos demais recursos elegíveis. Esta regra substitui o cancelamento integral do pedido como condição para cancelar recursos ainda não iniciados; as permissões e os registros existentes de cancelamento permanecem aplicáveis.
 
 ## 7. Fluxos principais em alto nível
 
@@ -113,7 +114,7 @@ O responsável consulta a solicitação e as informações necessárias para ava
 
 ### 7.3. Alteração ou cancelamento
 
-O solicitante autorizado consulta uma reserva própria e solicita alteração ou cancelamento. Antes de confirmar uma alteração, a disponibilidade dos recursos deve ser verificada novamente. A ação e seu resultado ficam sujeitos às permissões e regras aplicáveis à reserva.
+O solicitante autorizado consulta uma reserva própria e solicita alteração ou cancelamento. Antes de confirmar uma alteração, a disponibilidade dos recursos deve ser verificada novamente. Em uma reserva com múltiplos recursos, no momento do cancelamento, a ação se aplica somente aos recursos cujo horário de início ainda não chegou; recursos já iniciados permanecem ativos e não bloqueiam o cancelamento dos demais elegíveis. O cancelamento integral do pedido não é exigido para cancelar recursos elegíveis. A ação e seu resultado ficam sujeitos às permissões e regras aplicáveis à reserva, incluindo motivo, histórico e notificação existentes.
 
 ### 7.4. Movimentação de material
 
@@ -157,7 +158,7 @@ As operações relevantes devem manter histórico rastreável, incluindo o usuá
 ### Dependências e definições pendentes
 
 - Definir critérios e categorias de solicitações especiais e seus responsáveis pela aprovação.
-- Definir prazos, antecedência mínima, duração, limites de reservas e regras de cancelamento ou alteração.
+- Definir prazos, antecedência mínima, duração, limites de reservas e demais regras de cancelamento ou alteração não cobertas pela regra de cancelamento por recurso acima.
 - Definir estados e transições do ciclo de vida da solicitação.
 - Definir escopo de delegação, acumulação de perfis e permissões detalhadas.
 - Definir processo e prazos de retirada e devolução, incluindo tratamento de atrasos e ocorrências.
@@ -174,3 +175,4 @@ As operações relevantes devem manter histórico rastreável, incluindo o usuá
 | Data | Versão | Descrição | Autor |
 |---|---|---|---|
 | 2026-10-22 | 0.1 | Criação do rascunho com visão, escopo e personas; requisitos e critérios de aceitação adiados. | @pm |
+| 2026-10-26 | 0.2 | Registra cancelamento parcial de reservas multi-recurso conforme horário de início de cada recurso e substitui a regra de cancelamento integral do pedido para esse caso. | @pm |

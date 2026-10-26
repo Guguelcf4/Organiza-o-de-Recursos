@@ -1,0 +1,20 @@
+{
+  "name": "organiza-o-de-recursos",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.11.0"
+  },
+  "scripts": {
+    "cli": "node --env-file-if-exists=.env bin/organiza.js",
+    "db:check": "npm run cli -- db check",
+    "db:migrate": "npm run cli -- db migrate",
+    "test": "node --env-file-if-exists=.env --test",
+    "test:db": "node --env-file-if-exists=.env scripts/require-test-database.js && node --env-file-if-exists=.env --test tests/database.test.js"
+  },
+  "dependencies": {
+    "node-pg-migrate": "^9.0.0",
+    "pg": "^8.16.3"
+  }
+}
